@@ -21,6 +21,7 @@ def set_dir():
     except:
         print('No argument passed - trying current directory.')
         dir_name=os.getcwd()
+	print("Working site directory set to ", dir_name)
     return dir_name
 
 def load_params(root_dir):
