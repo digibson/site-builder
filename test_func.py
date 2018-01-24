@@ -16,11 +16,11 @@ def set_dir():
     try:
         dir_name=sys.argv[1]
         if not os.path.isdir(dir_name):
-            print('Argument is not a directory - trying current directory.')
             dir_name=os.getcwd()
+			print('Argument is not a directory - using current directory.\n', dir_name)
     except:
-        print('No argument passed - trying current directory.')
         dir_name=os.getcwd()
+        print('No argument passed - using current directory.\n', dir_name)
     return dir_name
 
 def load_params(root_dir):
