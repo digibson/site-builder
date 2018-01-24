@@ -3,11 +3,13 @@
 import sys
 import os
 
+params = {}
+
+
 #Test whether an argument was passed with the program command
 def main():
     root = set_dir()
-    params = {}
-    params.update(load_params(root))
+    load_params(root)
     print_dirs(root)
     del_site(root,params['site'])
 
@@ -24,7 +26,6 @@ def set_dir():
     return dir_name
 
 def load_params(root_dir):
-	list_params = {}
     param_path = os.path.join(root_dir, "_params.txt")
     if not os.path.isfile(params_path):
         print('_params.txt file missing in directory ', dir_name, '\n Confirm file exists or correct folder used.')
@@ -34,9 +35,10 @@ def load_params(root_dir):
     for line in params:
         try:
             split_line = line.split(":", 1)
-            list_params.update({split_line[0].strip():split_line[1].strip()})
+			#global dictionary
+            params.update({split_line[0].strip():split_line[1].strip()})
         except:
-    return list_params
+	print("Global params dictionary loaded")
 
 #reads a supplied filename and returns the contents as a list
 def read_file(file_path):
