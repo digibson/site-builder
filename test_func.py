@@ -16,16 +16,15 @@ def set_dir():
     try:
         dir_name=sys.argv[1]
         if not os.path.isdir(dir_name):
-            print('Argument is not a directory - trying current directory.')
             dir_name=os.getcwd()
+			print('Argument is not a directory - using current directory.\n', dir_name)
     except:
-        print('No argument passed - trying current directory.')
         dir_name=os.getcwd()
-	print("Working site directory set to ", dir_name)
+        print('No argument passed - using current directory.\n', dir_name)
     return dir_name
 
 def load_params(root_dir):
-    param_path = params_path(root_dir)
+    param_path = os.path.join(root_dir, "_params.txt")
     params_exists(param_path)
     params = read_params(param_path)
     new_params = {}
@@ -35,16 +34,7 @@ def load_params(root_dir):
             new_params.update({line2[0].strip():line2[1].strip()})
         except:
     return new_params
-
-
-
-
-
-#form the _params file path and return it
-def params_path(dir_path):
-    params_path = os.path.join(dir_path, "_params.txt")
-    return params_path
-    
+   
 # confirm_params seeks _params.txt file in directory and exits program if not present
 def params_exists(params_path):
     if not os.path.isfile(params_path):
