@@ -25,8 +25,7 @@ def set_dir():
 
 def load_params(root_dir):
     param_path = os.path.join(root_dir, "_params.txt")
-    params_exists(param_path)
-    params = read_params(param_path)
+    params = get_params(param_path)
     new_params = {}
     for line in params:
         try:
@@ -36,13 +35,12 @@ def load_params(root_dir):
     return new_params
    
 # confirm_params seeks _params.txt file in directory and exits program if not present
-def params_exists(params_path):
+def get_params(params_path):
     if not os.path.isfile(params_path):
         print('_params.txt file missing in directory ', dir_name, '\n Confirm file exists or correct folder used.')
         sys.exit(0)
-
-def read_params(param_file):
-    params = read_file(param_file)
+	else:
+		params = read_file(param_file)
     return params
 
 #reads a supplied filename and returns the contents as a list
