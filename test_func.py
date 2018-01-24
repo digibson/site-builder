@@ -38,7 +38,7 @@ def load_params(root_dir):
 # confirm_params seeks _params.txt file in directory and exits program if not present
 def params_exists(params_path):
     if not os.path.isfile(params_path):
-        print("_params.txt file missing in directory ", dir_name)
+        print('_params.txt file missing in directory ', dir_name, '\n Confirm file exists or correct folder used.')
         sys.exit(0)
 
 def read_params(param_file):
