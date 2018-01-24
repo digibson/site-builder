@@ -30,10 +30,9 @@ def load_params(root_dir):
     new_params = {}
     for line in params:
         try:
-            line2 = line.split(":")
+            line2 = line.split(":", 1)
             new_params.update({line2[0].strip():line2[1].strip()})
         except:
-            print('White space ignored in params file')
     return new_params
    
 # confirm_params seeks _params.txt file in directory and exits program if not present
