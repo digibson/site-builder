@@ -17,7 +17,6 @@ def set_dir():
         dir_name=sys.argv[1]
         if not os.path.isdir(dir_name):
             dir_name=os.getcwd()
-			if
 			print('Argument is not a directory - using current directory.\n', dir_name)
     except:
         dir_name=os.getcwd()
