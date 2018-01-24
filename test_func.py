@@ -24,7 +24,7 @@ def set_dir():
     return dir_name
 
 def load_params(root_dir):
-    param_path = params_path(root_dir)
+    param_path = os.path.join(root_dir, "_params.txt")
     params_exists(param_path)
     params = read_params(param_path)
     new_params = {}
@@ -35,16 +35,7 @@ def load_params(root_dir):
         except:
             print('White space ignored in params file')
     return new_params
-
-
-
-
-
-#form the _params file path and return it
-def params_path(dir_path):
-    params_path = os.path.join(dir_path, "_params.txt")
-    return params_path
-    
+   
 # confirm_params seeks _params.txt file in directory and exits program if not present
 def params_exists(params_path):
     if not os.path.isfile(params_path):
