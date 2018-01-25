@@ -55,7 +55,7 @@ def compile_layouts(root_dir):
     for entry in layout_files:
         entry_file = entry.strip()
         layout_key = os.path.splittext(entry_file)[0]
-        f = os.path.join(layout_path, entryfile)
+        f = os.path.join(layout_path, entry_file)
         if os.isfile(f):
             include_files = read_file(f)
                 layout_text.clear()
