@@ -40,6 +40,34 @@ def load_params(root_dir):
         except:
 	print("Global params dictionary loaded")
 
+def compile_layouts(root_dir):
+    layouts_path = os.path.join(root_dir, params['layouts'])
+    includes_path = os.path.join(root_dir, params['includes'])
+    if not os.path.isdir(includes_path):
+        print(includes_path, " does not exist - exiting program.")
+        sys.exit(0)
+    if not os.path.isdir(layouts_path):
+        print(layouts_path, " does not exist - exiting program.")
+        sys.exit(0)
+    else:
+        layout_files = os.listdir(layouts_path)
+    layout_text = []
+    for entry in layout_files:
+        entry_file = entry.strip()
+        layout_key = os.path.splittext(entry_file)[0]
+        f = os.path.join(layout_path, entryfile)
+        if os.isfile(f):
+            include_files = read_file(f)
+                layout_text.clear()
+                for include_file in include_files:
+                    inc_file = include_file.strip()
+                    if os.isfile(inc_file):
+                    layout_text.append(read_cached_files(inc_file))
+        layouts.update{layout_key:layouts_text}
+
+
+
+
 #reads a supplied filename and returns the contents as a list
 def read_file(file_path):
 	with open(file_path ,'r') as rf:
