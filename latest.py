@@ -11,8 +11,9 @@ p_holder = {}
 def main():
     root = set_dir()
     load_params(root)
-    load_p_holders(root)
+    load_ph(root)
     compile_layouts(root)
+    compile_page('/home/dave/Documents/python/structure/_posts/','2018-01-26-test_post.md')
 #    print_dirs(root)
 #    del_site(root,params['site'])
 
@@ -44,7 +45,7 @@ def load_params(root_dir):
             print("Ignoring params file content where no colon separator exists")
     print("Global parameters dictionary loaded")
 
-def load_p_holders(root_dir):
+def load_ph(root_dir):
     ph_file = os.path.join(root_dir, params['placeholders'])
     if not os.path.isfile(ph_file):
         print(params[placeholders], ' file missing in directory. Confirm file exists.')
@@ -55,13 +56,12 @@ def load_p_holders(root_dir):
         try:
             split_line = line.split(":", 1)
             split_line2 = split_line[1].split(',', 1)
-            split_line2 = [line2.strip() for line2 in split_line2]
-            p_holder.update({split_line[0].strip():split_line2})
+            split_line2 = [line.strip() for line in split_line2]
+            p_holder.update({split_line[0].strip():tuple(split_line2)})
         except:
             print("Ignoring p_holder file content where no colon separator exists")
     print(p_holder)
     print("Global placeholders dictionary loaded")
-  
 
 def compile_layouts(root_dir):
     layouts_path = os.path.join(root_dir, params['layouts'])
@@ -128,8 +128,21 @@ def get_content(str):
         if not str[x].strip() == '':
            contents.append(str[x].strip())
         content.update({'content':contents})
-    print(content)
+    return content
 
+def compile_page(path, f_name): ## NEEDS FURTHER DEVELOPMENT ## 
+    content = {}
+    f = os.path.join(path, f_name)
+    str=read_file(f)
+    content.update(get_content(str))
+    layout_template = layouts[content['layout']]
+    for key, val in p_holder.items():
+        try:
+            line_no = layout_template.index(key)
+            layout_template[line_no] = val[1].format(content[val[0]])
+        except:
+            print('No entry for ', key)
+    print(layout_template)
 
 #reads a supplied filename and returns the contents as a list
 def read_file(file_path):
@@ -162,13 +175,6 @@ def print_dirs(dir_name):
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
 
 #remove dir including itself - requires import shutil
 def remove_dirs(dir_name):
