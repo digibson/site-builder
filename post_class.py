@@ -8,12 +8,8 @@ filename = '2018-01-26-test-post.md'
 
 def main():
     p1 = PostData(filepath, filename)
-    #print(p1.fpath)
-    #print(p1.folders)
-    #print(p1.post_date)
-    #print(p1.bounds)
-    #print(p1.content)
-    #print(p1.raw_data)
+    print(p1.fpath)
+    print(p1.folders)
     print(p1.title)
     print(p1.layout)
     print(p1.image)
